@@ -1,4 +1,4 @@
-# Source Insight 4 补丁
+# 用于破解 Source Insight 4 的补丁/注册机
 
 🌍 **[English](README-EN.md) | [简体中文](README.md)**
 
