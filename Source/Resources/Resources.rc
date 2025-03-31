@@ -3,8 +3,8 @@
 ISOLATIONAWARE_MANIFEST_RESOURCE_ID RT_MANIFEST "Manifest.xml"
 
 1 VERSIONINFO
-FILEVERSION 1,0,0,0
-PRODUCTVERSION 1,0,0,0
+FILEVERSION 1,0,1,0
+PRODUCTVERSION 1,0,1,0
 FILEOS VOS_NT_WINDOWS32
 FILETYPE VFT_DLL
 BEGIN
@@ -13,9 +13,9 @@ BEGIN
         BLOCK "000004b0"
         BEGIN
             VALUE "FileDescription", "Source Insight 4 Patch"
-            VALUE "FileVersion", "1.0.0.0"
+            VALUE "FileVersion", "1.0.1.0"
             VALUE "ProductName", "Source Insight 4 Patch"
-            VALUE "ProductVersion", "1.0.0.0"
+            VALUE "ProductVersion", "1.0.1.0"
         END
     END
     BLOCK "VarFileInfo"
