@@ -27,10 +27,10 @@ std::array<uint8_t, 26> LicenseSerial::alphabetTable = {
 wchar_t LicenseSerial::GenerateRandomLetterOrDigit() noexcept {
     std::uniform_int_distribution<uint16_t> distribution(0, 35);
     uint16_t randomValue = distribution(randomEngine);
-    if (randomValue < 10) {
-        return L'0' + randomValue;
+    if (randomValue < 26) {
+        return L'A' + randomValue;
     } else {
-        return L'A' + randomValue - 10;
+        return L'0' + randomValue - 26;
     }
 }
 
@@ -52,23 +52,24 @@ LicenseSerial::LicenseSerial() noexcept : randomEngine(randomDevice()) {}
 
 std::wstring LicenseSerial::Generate() noexcept {
     std::wstring serial(19, L'-');
-    serial[0] = L'S';
-    serial[1] = L'4';
-    serial[2] = L'S';
-    serial[3] = L'G';
-    serial[5] = GenerateRandomLetterOrDigit();
-    serial[6] = GenerateRandomRGDF();
-    serial[7] = GenerateRandomLetterOrDigit();
-    serial[8] = GenerateRandomLetterOrDigit();
-    for (int i = 0; i < 4; i++) {
-        serial[i + 10] = GenerateRandomLetterOrDigit();
+    wchar_t* serialData = serial.data();
+    serialData[0] = L'S';
+    serialData[1] = L'4';
+    serialData[2] = L'S';
+    serialData[3] = L'G';
+    serialData[5] = GenerateRandomLetterOrDigit();
+    serialData[6] = GenerateRandomRGDF();
+    serialData[7] = GenerateRandomLetterOrDigit();
+    serialData[8] = GenerateRandomLetterOrDigit();
+    for (size_t i = 0; i < 4; i++) {
+        serialData[i + 10] = GenerateRandomLetterOrDigit();
     }
-    for (int i = 0; i < 4; i++) {
-        uint8_t hash = substitutionTable[serial[0] + i];
-        for (int j = 1; j < 15; j++) {
-            hash = substitutionTable[serial[j] ^ hash];
+    for (size_t i = 0; i < 4; i++) {
+        uint8_t hash = substitutionTable[serialData[0] + i];
+        for (size_t j = 1; j < 15; j++) {
+            hash = substitutionTable[serialData[j] ^ hash];
         }
-        serial[i + 15] = alphabetTable[hash % 26];
+        serialData[i + 15] = alphabetTable[hash % 26];
     }
     return serial;
 }
